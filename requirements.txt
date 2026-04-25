@@ -1,0 +1,6 @@
+python-dotenv
+atproto
+requests
+pillow
+bottle
+python-dateutil

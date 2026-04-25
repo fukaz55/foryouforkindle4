@@ -1,0 +1,76 @@
+<html>
+	<head>
+		<title>{{ author['display_name'] }} - For you for Kindle4</title>
+		<meta http-equiv="refresh" content="30; url=/view/{{ next_id }}">
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.14.2/themes/base/jquery-ui.css">
+		<style type="text/css">
+			#content {
+				width: 600px;
+				margin: 0 auto;
+			}
+			#image {
+				width: {{ width }}px;
+				margin: {{ margin_top }}px 0 0 {{ margin_left }}px;
+			}
+			button#info {
+				position: absolute; 
+				top: 700px; left: 30px;
+			}
+			.toggler {
+				width: 600px;
+				position: absolute; 
+				top: 450px;
+			}
+			#effect {
+				max-height: 200px;
+				width: 80%;
+				margin: 0 auto;
+				padding: 0.4em;
+				display: none;
+			}
+			#effect h3 {
+				margin: 0;
+				padding: 0.2em 0.4em;
+				text-align: center;
+			}
+			#effect h3 span.handle {
+				font-size: 80%;
+				font-weight: normal;
+			}
+			#effect p.description {
+				margin-bottom: 0;
+			}
+			#effect p.time {
+				font-size: small;
+				text-align: right;
+				padding: 0.4em;
+				margin: 0;
+			}
+		</style>
+		<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+		<script>
+			$( function() {
+				$( "#info" ).on( "click", function() {
+					var value = $( "#effect" ).css( "display" );
+					value = (value == "none" ? "block" : "none");
+					$( "#effect" ).css( "display", value );
+				});
+			} );
+		</script>
+	</head>
+	<body>
+		<div id="content">
+			<div id="image">
+				<img src="/images/{{ filename }}" alt="{{ alt }}" title="{{ alt }}">
+			</div>
+			<div class="toggler">
+				<div id="effect" class="ui-widget-content ui-corner-all">
+					<h3 class="ui-widget-header ui-corner-all">{{ author['display_name'] }} <span class="handle">@{{ author['handle'] }}</span></h3>
+					<p class="description">{{ post['message'][:100] }}</p>
+					<p class="time"><a href="{{ url }}" target="_blank">{{ created_at }}</a></p>
+				</div>
+			</div>
+			<button id="info" class="ui-button ui-widget ui-corner-all" alt="投稿を表示"><span class="ui-icon ui-icon-info"></span></button>
+		</div>
+	</body>
+</html>
