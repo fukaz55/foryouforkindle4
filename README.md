@@ -8,30 +8,31 @@ BlueskyのFor Youフィードの画像をKindle4で見るためのビューア
 ### 説明
 
 * Bluesky の「For You」フィード
- * ユーザーの「いいね」履歴に基づいて好みの投稿を表示する、Bluesky のアルゴリズムフィード
- * 自分は Bluesky で作品を発表しているイラストレーターの方々の投稿に頻繁に「いいね」を付けているためか、For Youフィードには様々なイラストが表示される。うれしい
+  * ユーザーの「いいね」履歴に基づいて好みの投稿を表示する、Bluesky のアルゴリズムフィード
+    * https://bsky.app/profile/did:plc:3guzzweuqraryl3rdkimjamk/feed/for-you
+  * 自分は Bluesky で作品を発表しているイラストレーターの方々の投稿に頻繁に「いいね」を付けているためか、For Youフィードには様々なイラストがたくさん表示される。うれしい
 
 * Amazon Kindle4
- * 2011年に発売された Kindle。画面解像度は 600x800 Pixel。モノクロ16階調のE Ink製電子ペーパー
- * 15年前のハードウェアだが、現在でも電子書籍端末として普通に使える。自分は主にメールマガジンを読むために使用している
- * それ以外の使い方はできないかと考えた結果、Kindle に内蔵されているWebブラウザを使ったイラストギャラリーを作ることにした
- * 何故わざわざモノクロのE-Ink搭載端末でイラストを見ようとしているの？　と聞かれても「**作りたかったから**」としか言えない
+  * 2011年に発売された Kindle。画面解像度は 600x800 Pixel。モノクロ16階調のE Ink製電子ペーパー
+  * 15年前のハードウェアだが、現在でも電子書籍端末として普通に使える。自分は主にメールマガジンを読むために使用している
+  * それ以外の使い方はできないかと考えた結果、Kindle に内蔵されているWebブラウザを使ったイラストギャラリーを作ることにした
+  * 何故わざわざモノクロのE-Ink搭載端末でイラストを見ようとしているの？　と聞かれても「**作りたかったから**」としか言えない
 
 ## 起動方法
 
 * Docker と git をインストールする。
 * このリポジトリを任意のディレクトリに clone する。
- * `git clone git@github.com:fukaz55/foryouforkindle4.git`
+  * `git clone git@github.com:fukaz55/foryouforkindle4.git`
 * .env.sample ファイルを .env にリネームする。
 * .env の ACCOUNT と PASSWORD の項目に、それぞれあなたの Bluesky のアカウントとパスワード（アプリパスワードが望ましい）を設定する。
 * Dockerイメージをビルドする。
- * `docker build -t foryou-forkindle4 .`
+  * `docker build -t foryou-forkindle4 .`
 * Dockerイメージを実行する。
- * `docker run -p 8080:8080 --name foryou-forkindle4-1 foryou-forkindle4`
-* 「Listening on http://0.0.0.0:8080/」と表示されたら、kindle4 にWebブラウザを起動し、URLに「http://(Dockerを実行しているPCのIPアドレス):8080/」と入力する。
-* Enjoy...
+  * `docker run -p 8080:8080 --name foryou-forkindle4-1 foryou-forkindle4`
+* `Listening on http://0.0.0.0:8080/` と表示されたら、kindle4 にWebブラウザを起動し、URLに「http://(Dockerを実行しているPCのIPアドレス):8080/」と入力する。
+* **Enjoy...**
 * 停止したい時は Docker を操作してイメージを止める。
- * `docker stop foryou-forkindle4-1`
+  * `docker stop foryou-forkindle4-1`
 
 ## 使い方と注意事項
 
@@ -43,5 +44,5 @@ BlueskyのFor Youフィードの画像をKindle4で見るためのビューア
 * 10分ほど放置すると、Kindleのスクリーンセーバー機能が自動で立ち上がります。時々は kindle を操作してスクリーンセーバーの起動を回避してください。
 * フィードを読み込むのはイメージの起動時のみです。新しい投稿をフィードから読みたい場合は、一度イメージを終了させ、再度起動して下さい。
 * 取得した投稿のうち、投稿者がBluesky外部への露出を禁止している場合、および投稿のラベルに「ポルノ」「暴力」「ゴア表現」「偽情報」等が設定されていた場合は、表示の対象外としているつもりです。
-* .env の IMAGE_WIDTH, IMAGE_HEIGHT の値を変えることで、今の Kindle Peperwhite や他の E-Ink デバイスでも動くかもしれません（未検証）。
+* .env の IMAGE_WIDTH, IMAGE_HEIGHT の値を変えることで、今の Kindle Peperwhite や他の E-Ink デバイスでも使えるようになるかもしれません（未検証）。
 
