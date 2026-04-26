@@ -54,6 +54,7 @@ def main():
         try:
             post = item.post
             record = post.record
+            logging.debug(f"uri:{post.uri} cid:{post.cid}")
 
             # [条件] 投稿がリポストである (フィード上の理由がリポスト)
             if hasattr(item, 'reason') and item.reason:
@@ -91,9 +92,11 @@ def main():
             skip_unsafe = False
             if hasattr(post, 'labels') and post.labels:
                 unsafe_labels = {'porn', 'graphic-media', 'gore', 'spam', 'misleading', '!no-unauthenticated'}
-                post_labels = {l.val for l in post.labels} if post.labels else set()
-                if not post_labels.isdisjoint(unsafe_labels):
-                    skip_unsafe = True
+                for label in post.labels:
+                    logging.debug(f"{post.cid} label:{label.val}")
+                    if label.val in unsafe_labels:
+                        skip_unsafe = True
+                        break
             if skip_unsafe:
                 continue
 
