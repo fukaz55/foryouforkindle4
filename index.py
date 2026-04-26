@@ -66,7 +66,12 @@ def view(id):
 
         return template('index', filename=image['monochrome'], width=image["width"], margin_top=margin_top, margin_left=margin_left, alt=alt, author=author, post=post, url=url, next_id=next_id, created_at=created_at)
     else:
-        abort(404, "ページが見つかりません。")
+        # ページが見つからない場合、一番新しい投稿を探してリダイレクトする
+        id = get_first_id()
+        if id is not None:
+           redirect(f"/view/{id}")
+        else:
+            abort(404, "ページが見つかりません。")
 
 @route('/images/<file_path:path>')
 def static(file_path):
